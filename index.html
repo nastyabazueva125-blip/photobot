@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Бриф — Теннисный кемп · Овально</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --beige: #E1DCD3;
+      --dark:  #141414;
+      --blue:  #1A1AFF;
+      --black: #080808;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--dark);
+      color: var(--white);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ─── HEADER ─── */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 32px;
+      background: var(--beige);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      text-decoration: none;
+      color: var(--black);
+    }
+
+    .logo-eye {
+      width: 26px; height: 26px;
+      border: 2.5px solid var(--black);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .logo-eye::after {
+      content: '';
+      width: 9px; height: 9px;
+      background: var(--black);
+      border-radius: 50%;
+    }
+
+    .logo-name {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: -0.01em;
+      text-transform: lowercase;
+    }
+
+    .logo-sep {
+      width: 1px; height: 18px;
+      background: rgba(0,0,0,0.2);
+      margin: 0 6px;
+    }
+
+    .logo-page {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .progress-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .pdot {
+      width: 28px; height: 4px;
+      background: rgba(0,0,0,0.12);
+      border-radius: 2px;
+      transition: background 0.3s;
+    }
+
+    .pdot.done   { background: var(--black); }
+    .pdot.active { background: var(--blue); }
+
+    .progress-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(0,0,0,0.4);
+      text-transform: uppercase;
+    }
+
+    /* ─── INTRO ─── */
+    .intro {
+      background: var(--beige);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 40px 80px;
+    }
+
+    .eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(56px, 14vw, 120px);
+      line-height: 0.9;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 44px;
+    }
+
+    .hero-title .blue {
+      color: var(--blue);
+      text-decoration: underline;
+      text-decoration-thickness: 4px;
+      text-underline-offset: 6px;
+    }
+
+    .intro-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 48px;
+    }
+
+    .pill-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 11px 22px;
+      background: var(--black);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-radius: 999px;
+    }
+
+    .pill-outline {
+      background: transparent;
+      color: var(--black);
+      border: 1.5px solid rgba(0,0,0,0.3);
+    }
+
+    .intro-desc {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.4);
+      margin-bottom: 48px;
+      max-width: 420px;
+      line-height: 1.8;
+    }
+
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 18px 36px;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-start:hover { opacity: 0.85; }
+
+    /* ─── FORM SECTIONS ─── */
+    .fsec {
+      background: var(--dark);
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      padding: 80px 40px;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+
+    .fsec.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .fsec-inner {
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .sec-num {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 24px;
+    }
+
+    .sec-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(38px, 7vw, 76px);
+      line-height: 0.93;
+      letter-spacing: -0.025em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+
+    .sec-sub {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 48px;
+    }
+
+    /* ─── FIELDS ─── */
+    .field { margin-bottom: 28px; }
+
+    .field-lbl {
+      display: block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      padding: 14px 20px;
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--blue);
+      background: rgba(26,26,255,0.06);
+    }
+
+    input::placeholder, textarea::placeholder {
+      color: rgba(255,255,255,0.18);
+    }
+
+    textarea { min-height: 90px; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media(max-width:600px){ .two-col { grid-template-columns: 1fr; } }
+
+    /* ─── OPTIONS ─── */
+    .opt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 8px;
+    }
+
+    .opt-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .opt-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      user-select: none;
+    }
+
+    .opt-item:hover {
+      border-color: rgba(255,255,255,0.22);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .opt-item input { display: none; }
+
+    .opt-box {
+      width: 20px; height: 20px;
+      border: 1.5px solid rgba(255,255,255,0.22);
+      border-radius: 5px;
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .opt-radio .opt-box { border-radius: 50%; }
+
+    .opt-box::after {
+      content: '';
+      width: 9px; height: 9px;
+      background: var(--dark);
+      border-radius: 2px;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .opt-radio .opt-box::after { border-radius: 50%; }
+
+    .opt-item:has(input:checked) .opt-box {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .opt-item:has(input:checked) .opt-box::after { opacity: 1; }
+
+    .opt-item:has(input:checked) {
+      border-color: var(--blue);
+      background: rgba(26,26,255,0.08);
+    }
+
+    .opt-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.4;
+    }
+
+    .opt-note {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      margin-top: 3px;
+    }
+
+    /* ─── TAGS ─── */
+    .tag-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
+
+    .tag {
+      padding: 11px 20px;
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      cursor: pointer;
+      color: rgba(255,255,255,0.5);
+      transition: all 0.2s;
+    }
+
+    .tag:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
+    .tag.on { background: var(--blue); border-color: var(--blue); color: var(--white); }
+
+    /* ─── HINT ─── */
+    .hint {
+      display: flex;
+      gap: 12px;
+      padding: 14px 18px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.02);
+      margin-top: 12px;
+    }
+
+    .hint-text { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+
+    /* ─── NAV ─── */
+    .sec-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 52px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 24px;
+      background: transparent;
+      color: rgba(255,255,255,0.5);
+      border: 1.5px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-back:hover { border-color: rgba(255,255,255,0.3); color: var(--white); }
+
+    .btn-next {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 15px 30px;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .btn-next:hover { opacity: 0.85; }
+
+    /* ─── RESULT ─── */
+    #result {
+      background: var(--beige);
+      min-height: 100vh;
+      display: none;
+      flex-direction: column;
+      padding: 100px 40px 80px;
+    }
+
+    #result.show { display: flex; }
+
+    .res-inner { max-width: 860px; width: 100%; margin: 0 auto; }
+
+    .res-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(60px, 13vw, 110px);
+      line-height: 0.9;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--black);
+      margin-bottom: 48px;
+    }
+
+    .res-title .blue { color: var(--blue); }
+
+    .res-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+      margin-bottom: 40px;
+    }
+
+    @media(max-width:640px){ .res-grid { grid-template-columns: 1fr; } }
+
+    .res-card {
+      background: rgba(0,0,0,0.06);
+      padding: 20px 22px;
+      border-radius: 4px;
+    }
+
+    .res-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.35);
+      margin-bottom: 6px;
+    }
+
+    .res-val {
+      font-size: 14px;
+      color: var(--black);
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    .res-val:empty::after { content: '—'; color: rgba(0,0,0,0.25); }
+
+    .res-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: var(--black);
+      color: var(--white);
+      border: none;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn-dark:hover { opacity: 0.8; }
+    .btn-dark.copied { background: #1a6a1a; }
+
+    .btn-outline-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 13px 26px;
+      background: transparent;
+      color: var(--black);
+      border: 1.5px solid rgba(0,0,0,0.25);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+
+    .btn-outline-dark:hover { border-color: var(--black); }
+
+    @media print {
+      header, .intro, .fsec, .sec-nav, .res-actions { display: none !important; }
+      #result { display: flex !important; padding: 20px; min-height: auto; background: #fff; }
+      .res-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-eye"></div>
+    <span class="logo-name">ovalno</span>
+    <div class="logo-sep"></div>
+    <span class="logo-page">Бриф</span>
+  </a>
+  <div class="header-right">
+    <div class="progress-dots" id="dots">
+      <div class="pdot" data-i="1"></div>
+      <div class="pdot" data-i="2"></div>
+      <div class="pdot" data-i="3"></div>
+      <div class="pdot" data-i="4"></div>
+      <div class="pdot" data-i="5"></div>
+      <div class="pdot" data-i="6"></div>
+      <div class="pdot" data-i="7"></div>
+      <div class="pdot" data-i="8"></div>
+      <div class="pdot" data-i="9"></div>
+    </div>
+    <span class="progress-num" id="pnum">0 / 9</span>
+  </div>
+</header>
+
+<!-- ═══ INTRO ═══ -->
+<section class="intro">
+  <div class="eyebrow">Клиентский бриф · 2025</div>
+  <h1 class="hero-title">
+    ТЕННИСНЫЙ<br>
+    <span class="blue">КЕМП</span>
+  </h1>
+  <div class="intro-pills">
+    <span class="pill-tag">За 1 звонок</span>
+    <span class="pill-tag pill-outline">9 разделов</span>
+  </div>
+  <p class="intro-desc">
+    Проходим вопросы вместе.<br>
+    В конце — готовый бриф для скачивания.
+  </p>
+  <a href="#s1" class="btn-start">
+    Начать
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </a>
+</section>
+
+<!-- ═══ 01 О ПРОЕКТЕ ═══ -->
+<section class="fsec" id="s1" data-step="1">
+  <div class="fsec-inner">
+    <div class="sec-num">(01) О Проекте</div>
+    <h2 class="sec-title">О проекте</h2>
+    <p class="sec-sub">Общая информация о клиенте и кемпе</p>
+
+    <div class="field">
+      <label class="field-lbl">Имя / компания</label>
+      <input type="text" id="f_client" placeholder="Иван Петров / Tennis Club Pro" />
+    </div>
+    <div class="two-col">
+      <div class="field">
+        <label class="field-lbl">Телефон или email</label>
+        <input type="text" id="f_contact" placeholder="+7 999 000 00 00" />
+      </div>
+      <div class="field">
+        <label class="field-lbl">Название кемпа</label>
+        <input type="text" id="f_campname" placeholder="Pro Tennis Camp" />
+      </div>
+    </div>
+    <div class="field">
+      <label class="field-lbl">Где проходит кемп?</label>
+      <input type="text" id="f_location" placeholder="Москва / Подмосковье / Сочи…" />
+    </div>
+    <div class="field">
+      <label class="field-lbl">Даты / сезон</label>
+      <input type="text" id="f_dates" placeholder="Июнь — август, смены по 2 недели" />
+    </div>
+    <div class="field">
+      <label class="field-lbl">Уже есть сайт или соцсети?</label>
+      <input type="text" id="f_existing" placeholder="instagram.com/... или нет" />
+    </div>
+
+    <div class="sec-nav">
+      <span></span>
+      <a href="#s2" class="btn-next">Далее →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 02 АУДИТОРИЯ ═══ -->
+<section class="fsec" id="s2" data-step="2">
+  <div class="fsec-inner">
+    <div class="sec-num">(02) Аудитория</div>
+    <h2 class="sec-title">Кому<br>продаём?</h2>
+    <p class="sec-sub">Кому сайт — туда и ведём</p>
+
+    <div class="field">
+      <label class="field-lbl">Основная аудитория</label>
+      <div class="opt-grid">
+        <label class="opt-item">
+          <input type="checkbox" name="aud" value="Дети (6–14)" />
+          <span class="opt-box"></span>
+          <div><div class="opt-label">Дети</div><div class="opt-note">6–14 лет</div></div>
+        </label>
+        <label class="opt-item">
+          <input type="checkbox" name="aud" value="Подростки (15–17)" />
+          <span class="opt-box"></span>
+          <div><div class="opt-label">Подростки</div><div class="opt-note">15–17 лет</div></div>
+        </label>
+        <label class="opt-item">
+          <input type="checkbox" name="aud" value="Взрослые-любители" />
+          <span class="opt-box"></span>
+          <div><div class="opt-label">Взрослые</div><div class="opt-note">18+ любители</div></div>
+        </label>
+        <label class="opt-item">
+          <input type="checkbox" name="aud" value="Профи / спортсмены" />
+          <span class="opt-box"></span>
+          <div><div class="opt-label">Профи</div><div class="opt-note">Соревновательный уровень</div></div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Кто принимает решение о покупке?</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio">
+          <input type="radio" name="buyer" value="Родители" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Родители — покупают путёвку ребёнку</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="buyer" value="Сам участник" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Сам участник (взрослый)</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="buyer" value="И те и другие" />
+          <span class="opt-box"></span>
+          <div class="opt-label">И те, и другие</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Средний бюджет покупателя на кемп</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio">
+          <input type="radio" name="budget_buyer" value="До 50 000 ₽" />
+          <span class="opt-box"></span>
+          <div class="opt-label">До 50 000 ₽</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="budget_buyer" value="50 000 — 150 000 ₽" />
+          <span class="opt-box"></span>
+          <div class="opt-label">50 000 — 150 000 ₽</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="budget_buyer" value="150 000+ ₽" />
+          <span class="opt-box"></span>
+          <div class="opt-label">150 000+ ₽</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Дополнительно об аудитории</label>
+      <textarea id="f_aud_note" placeholder="Например: москвичи с доходом выше среднего, родители детей 8–12 лет…"></textarea>
+    </div>
+
+    <div class="sec-nav">
+      <a href="#s1" class="btn-back">← Назад</a>
+      <a href="#s3" class="btn-next">Далее →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 03 ЦЕЛИ САЙТА ═══ -->
+<section class="fsec" id="s3" data-step="3">
+  <div class="fsec-inner">
+    <div class="sec-num">(03) Цели</div>
+    <h2 class="sec-title">Цели<br>сайта</h2>
+    <p class="sec-sub">Что должен делать сайт</p>
+
+    <div class="field">
+      <label class="field-lbl">Главная цель — выберите одну</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio">
+          <input type="radio" name="goal" value="Онлайн-запись / бронирование" />
+          <span class="opt-box"></span>
+          <div>
+            <div class="opt-label">Онлайн-запись / бронирование</div>
+            <div class="opt-note">Форма, оплата, корзина</div>
+          </div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="goal" value="Получить лид (заявку)" />
+          <span class="opt-box"></span>
+          <div>
+            <div class="opt-label">Получить лид — заявку</div>
+            <div class="opt-note">Форма «оставить контакт», менеджер перезванивает</div>
+          </div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="goal" value="Имиджевый / информационный" />
+          <span class="opt-box"></span>
+          <div>
+            <div class="opt-label">Имиджевый / информационный</div>
+            <div class="opt-note">Продажа офлайн, сайт как визитка</div>
+          </div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Дополнительные целевые действия</label>
+      <div class="opt-grid">
+        <label class="opt-item">
+          <input type="checkbox" name="action" value="Позвонить" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Позвонить</div>
+        </label>
+        <label class="opt-item">
+          <input type="checkbox" name="action" value="WhatsApp / Telegram" />
+          <span class="opt-box"></span>
+          <div class="opt-label">WhatsApp / Telegram</div>
+        </label>
+        <label class="opt-item">
+          <input type="checkbox" name="action" value="Скачать PDF" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Скачать программу (PDF)</div>
+        </label>
+        <label class="opt-item">
+          <input type="checkbox" name="action" value="Перейти в соцсети" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Перейти в соцсети</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Как сейчас приходят клиенты?</label>
+      <textarea id="f_channels" placeholder="Сарафан, Инстаграм, Яндекс.Директ, рассылки…"></textarea>
+    </div>
+
+    <div class="sec-nav">
+      <a href="#s2" class="btn-back">← Назад</a>
+      <a href="#s4" class="btn-next">Далее →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 04 КОНТЕНТ ═══ -->
+<section class="fsec" id="s4" data-step="4">
+  <div class="fsec-inner">
+    <div class="sec-num">(04) Контент</div>
+    <h2 class="sec-title">Контент<br>и разделы</h2>
+    <p class="sec-sub">Что есть, чего нет, что нужно создать</p>
+
+    <div class="field">
+      <label class="field-lbl">Какие разделы нужны?</label>
+      <div class="opt-grid">
+        <label class="opt-item"><input type="checkbox" name="pages" value="О кемпе" /><span class="opt-box"></span><div class="opt-label">О кемпе</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="Программа / расписание" /><span class="opt-box"></span><div class="opt-label">Программа / расписание</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="Тренеры" /><span class="opt-box"></span><div class="opt-label">Тренеры</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="Стоимость / тарифы" /><span class="opt-box"></span><div class="opt-label">Стоимость / тарифы</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="Фото / галерея" /><span class="opt-box"></span><div class="opt-label">Фото / галерея</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="Отзывы" /><span class="opt-box"></span><div class="opt-label">Отзывы</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="FAQ" /><span class="opt-box"></span><div class="opt-label">FAQ</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="Блог / новости" /><span class="opt-box"></span><div class="opt-label">Блог / новости</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="Контакты / карта" /><span class="opt-box"></span><div class="opt-label">Контакты / карта</div></label>
+        <label class="opt-item"><input type="checkbox" name="pages" value="Запись / оплата" /><span class="opt-box"></span><div class="opt-label">Запись / оплата</div></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Что есть из материалов?</label>
+      <div class="opt-grid">
+        <label class="opt-item"><input type="checkbox" name="assets" value="Фотографии" /><span class="opt-box"></span><div class="opt-label">Фотографии</div></label>
+        <label class="opt-item"><input type="checkbox" name="assets" value="Видео" /><span class="opt-box"></span><div class="opt-label">Видео</div></label>
+        <label class="opt-item"><input type="checkbox" name="assets" value="Логотип / айдентика" /><span class="opt-box"></span><div class="opt-label">Логотип / айдентика</div></label>
+        <label class="opt-item"><input type="checkbox" name="assets" value="Готовые тексты" /><span class="opt-box"></span><div class="opt-label">Готовые тексты</div></label>
+      </div>
+      <div class="hint">
+        <span class="hint-text">Если материалов нет — обсудим съёмку и копирайтинг отдельно.</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Сколько тренеров показываем?</label>
+      <input type="text" id="f_coaches" placeholder="2, 5, 10… или «все»" />
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Уникальное торговое предложение — почему к вам, а не к конкурентам?</label>
+      <textarea id="f_utp" placeholder="Что делает кемп особенным? Методика, тренеры, локация, цена…"></textarea>
+    </div>
+
+    <div class="sec-nav">
+      <a href="#s3" class="btn-back">← Назад</a>
+      <a href="#s5" class="btn-next">Далее →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 05 КОНКУРЕНТЫ ═══ -->
+<section class="fsec" id="s5" data-step="5">
+  <div class="fsec-inner">
+    <div class="sec-num">(05) Конкуренты</div>
+    <h2 class="sec-title">Рынок<br>и референсы</h2>
+    <p class="sec-sub">Смотрим на рынок, определяем вектор</p>
+
+    <div class="field">
+      <label class="field-lbl">Конкуренты — сайты, с которыми вас сравнивают</label>
+      <textarea id="f_comp" placeholder="tenniscamp.ru, academytennis.ru — укажите 2–4 конкурента"></textarea>
+    </div>
+    <div class="field">
+      <label class="field-lbl">Что нравится у конкурентов?</label>
+      <textarea id="f_comp_like" placeholder="Конкретный сайт и что именно: структура, подача цен, дизайн…"></textarea>
+    </div>
+    <div class="field">
+      <label class="field-lbl">Что не нравится / хотите избежать?</label>
+      <textarea id="f_comp_hate" placeholder="Перегруженность, старый дизайн, нет мобильной версии…"></textarea>
+    </div>
+    <div class="field">
+      <label class="field-lbl">Референсы по дизайну — не обязательно теннис</label>
+      <textarea id="f_refs" placeholder="Ссылки на сайты, которые нравятся визуально или по структуре"></textarea>
+    </div>
+
+    <div class="sec-nav">
+      <a href="#s4" class="btn-back">← Назад</a>
+      <a href="#s6" class="btn-next">Далее →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 06 ДИЗАЙН ═══ -->
+<section class="fsec" id="s6" data-step="6">
+  <div class="fsec-inner">
+    <div class="sec-num">(06) Дизайн</div>
+    <h2 class="sec-title">Дизайн</h2>
+    <p class="sec-sub">Настроение и визуальные предпочтения</p>
+
+    <div class="field">
+      <label class="field-lbl">Тон и ощущение — можно несколько</label>
+      <div class="tag-wrap" id="tones">
+        <span class="tag" data-v="Энергичный">Энергичный</span>
+        <span class="tag" data-v="Премиальный">Премиальный</span>
+        <span class="tag" data-v="Дружелюбный">Дружелюбный</span>
+        <span class="tag" data-v="Спортивный">Спортивный</span>
+        <span class="tag" data-v="Минималистичный">Минималистичный</span>
+        <span class="tag" data-v="Игривый / детский">Игривый / детский</span>
+        <span class="tag" data-v="Серьёзный / деловой">Серьёзный / деловой</span>
+        <span class="tag" data-v="Тёплый / уютный">Тёплый / уютный</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Цветовые предпочтения</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio">
+          <input type="radio" name="colors" value="Есть фирменные цвета — возьмём их" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Есть фирменные цвета — возьмём их</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="colors" value="Нет — предложите вы" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Нет — предложите вы</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="colors" value="Есть идея — обсудим" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Есть идея — обсудим</div>
+        </label>
+      </div>
+      <input type="text" id="f_colors" placeholder="Конкретные цвета или пожелания" style="margin-top:12px;" />
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Стиль</label>
+      <div class="opt-grid">
+        <label class="opt-item opt-radio">
+          <input type="radio" name="style" value="Современный / трендовый" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Современный / трендовый</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="style" value="Классический / надёжный" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Классический / надёжный</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="style" value="Смелый / нестандартный" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Смелый / нестандартный</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Табу в дизайне</label>
+      <textarea id="f_notab" placeholder="Не хочу: мигающее, кислотные цвета, стоковые фото с теннисными ракетками…"></textarea>
+    </div>
+
+    <div class="sec-nav">
+      <a href="#s5" class="btn-back">← Назад</a>
+      <a href="#s7" class="btn-next">Далее →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 07 ТЕХНИКА ═══ -->
+<section class="fsec" id="s7" data-step="7">
+  <div class="fsec-inner">
+    <div class="sec-num">(07) Техника</div>
+    <h2 class="sec-title">Техника</h2>
+    <p class="sec-sub">Что нужно под капотом</p>
+
+    <div class="field">
+      <label class="field-lbl">Нужна ли CMS — система управления?</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio">
+          <input type="radio" name="cms" value="Да — буду сам редактировать" />
+          <span class="opt-box"></span>
+          <div>
+            <div class="opt-label">Да — буду сам редактировать</div>
+            <div class="opt-note">Тексты, фото, расписание</div>
+          </div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="cms" value="Нет — обращусь к вам при изменениях" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Нет — обращусь к вам при изменениях</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="cms" value="Не знаю — посоветуйте" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Не знаю — посоветуйте</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Нужные интеграции</label>
+      <div class="opt-grid">
+        <label class="opt-item"><input type="checkbox" name="integr" value="Онлайн-оплата" /><span class="opt-box"></span><div class="opt-label">Онлайн-оплата</div></label>
+        <label class="opt-item"><input type="checkbox" name="integr" value="Система бронирования" /><span class="opt-box"></span><div class="opt-label">Система бронирования</div></label>
+        <label class="opt-item"><input type="checkbox" name="integr" value="CRM" /><span class="opt-box"></span><div class="opt-label">CRM (Bitrix, AmoCRM…)</div></label>
+        <label class="opt-item"><input type="checkbox" name="integr" value="Яндекс Метрика / GA" /><span class="opt-box"></span><div class="opt-label">Яндекс Метрика / GA</div></label>
+        <label class="opt-item"><input type="checkbox" name="integr" value="Карта" /><span class="opt-box"></span><div class="opt-label">Карта (2ГИС / Яндекс)</div></label>
+        <label class="opt-item"><input type="checkbox" name="integr" value="Онлайн-чат" /><span class="opt-box"></span><div class="opt-label">Онлайн-чат</div></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Языки сайта</label>
+      <div class="opt-grid">
+        <label class="opt-item"><input type="checkbox" name="lang" value="Русский" /><span class="opt-box"></span><div class="opt-label">Русский</div></label>
+        <label class="opt-item"><input type="checkbox" name="lang" value="Английский" /><span class="opt-box"></span><div class="opt-label">Английский</div></label>
+        <label class="opt-item"><input type="checkbox" name="lang" value="Другой" /><span class="opt-box"></span><div class="opt-label">Другой</div></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Домен и хостинг</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio">
+          <input type="radio" name="hosting" value="Есть свои — дам доступы" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Есть свои — дам доступы</div>
+        </label>
+        <label class="opt-item opt-radio">
+          <input type="radio" name="hosting" value="Нет — помогите выбрать и настроить" />
+          <span class="opt-box"></span>
+          <div class="opt-label">Нет — помогите выбрать и настроить</div>
+        </label>
+      </div>
+    </div>
+
+    <div class="sec-nav">
+      <a href="#s6" class="btn-back">← Назад</a>
+      <a href="#s8" class="btn-next">Далее →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 08 БЮДЖЕТ И СРОКИ ═══ -->
+<section class="fsec" id="s8" data-step="8">
+  <div class="fsec-inner">
+    <div class="sec-num">(08) Бюджет и сроки</div>
+    <h2 class="sec-title">Бюджет<br>и сроки</h2>
+    <p class="sec-sub">Чтобы предложить подходящее решение</p>
+
+    <div class="field">
+      <label class="field-lbl">Бюджет на разработку</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio"><input type="radio" name="budget" value="До 150 000 ₽" /><span class="opt-box"></span><div class="opt-label">До 150 000 ₽</div></label>
+        <label class="opt-item opt-radio"><input type="radio" name="budget" value="150 000 — 350 000 ₽" /><span class="opt-box"></span><div class="opt-label">150 000 — 350 000 ₽</div></label>
+        <label class="opt-item opt-radio"><input type="radio" name="budget" value="350 000 — 700 000 ₽" /><span class="opt-box"></span><div class="opt-label">350 000 — 700 000 ₽</div></label>
+        <label class="opt-item opt-radio"><input type="radio" name="budget" value="700 000+ ₽" /><span class="opt-box"></span><div class="opt-label">700 000+ ₽</div></label>
+        <label class="opt-item opt-radio"><input type="radio" name="budget" value="Пока не готов называть цифру" /><span class="opt-box"></span><div class="opt-label">Пока не готов называть цифру</div></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Дедлайн запуска</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio">
+          <input type="radio" name="deadline" value="Максимально быстро" />
+          <span class="opt-box"></span>
+          <div><div class="opt-label">Максимально быстро</div><div class="opt-note">Горит сезон</div></div>
+        </label>
+        <label class="opt-item opt-radio"><input type="radio" name="deadline" value="1–2 месяца" /><span class="opt-box"></span><div class="opt-label">1–2 месяца</div></label>
+        <label class="opt-item opt-radio"><input type="radio" name="deadline" value="2–4 месяца" /><span class="opt-box"></span><div class="opt-label">2–4 месяца</div></label>
+        <label class="opt-item opt-radio"><input type="radio" name="deadline" value="Сроки гибкие" /><span class="opt-box"></span><div class="opt-label">Сроки гибкие</div></label>
+      </div>
+      <input type="text" id="f_deadline" placeholder="Или конкретная дата: 1 июня 2025" style="margin-top:12px;" />
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Поддержка после запуска</label>
+      <div class="opt-grid">
+        <label class="opt-item"><input type="checkbox" name="support" value="Ежемесячный абонемент" /><span class="opt-box"></span><div class="opt-label">Ежемесячный абонемент</div></label>
+        <label class="opt-item"><input type="checkbox" name="support" value="По запросу / по часам" /><span class="opt-box"></span><div class="opt-label">По запросу / по часам</div></label>
+        <label class="opt-item"><input type="checkbox" name="support" value="Справлюсь сам" /><span class="opt-box"></span><div class="opt-label">Справлюсь сам</div></label>
+      </div>
+    </div>
+
+    <div class="sec-nav">
+      <a href="#s7" class="btn-back">← Назад</a>
+      <a href="#s9" class="btn-next">Далее →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 09 ПРОЧЕЕ ═══ -->
+<section class="fsec" id="s9" data-step="9">
+  <div class="fsec-inner">
+    <div class="sec-num">(09) Прочее</div>
+    <h2 class="sec-title">Прочее</h2>
+    <p class="sec-sub">Всё, что не вошло выше</p>
+
+    <div class="field">
+      <label class="field-lbl">Как принимаете решения?</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio"><input type="radio" name="decision" value="Один принимаю всё" /><span class="opt-box"></span><div class="opt-label">Один принимаю всё</div></label>
+        <label class="opt-item opt-radio"><input type="radio" name="decision" value="Согласую с партнёрами / командой" /><span class="opt-box"></span><div class="opt-label">Согласую с партнёрами / командой</div></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Уже работали с веб-студией?</label>
+      <div class="opt-list">
+        <label class="opt-item opt-radio"><input type="radio" name="prev" value="Да" /><span class="opt-box"></span><div class="opt-label">Да</div></label>
+        <label class="opt-item opt-radio"><input type="radio" name="prev" value="Нет, первый раз" /><span class="opt-box"></span><div class="opt-label">Нет, первый раз</div></label>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Что важно в работе с подрядчиком? — можно несколько</label>
+      <div class="tag-wrap" id="vals">
+        <span class="tag" data-v="Скорость">Скорость</span>
+        <span class="tag" data-v="Качество дизайна">Качество дизайна</span>
+        <span class="tag" data-v="Быстрая связь">Быстрая связь</span>
+        <span class="tag" data-v="Прозрачность процесса">Прозрачность</span>
+        <span class="tag" data-v="Экспертиза">Экспертиза</span>
+        <span class="tag" data-v="Цена">Цена</span>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field-lbl">Дополнительные пожелания / вопросы</label>
+      <textarea id="f_extra" placeholder="Всё, что хотите добавить…"></textarea>
+    </div>
+
+    <div class="sec-nav">
+      <a href="#s8" class="btn-back">← Назад</a>
+      <button class="btn-next" onclick="buildResult()">Готово — смотреть бриф →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ RESULT ═══ -->
+<section id="result">
+  <div class="res-inner">
+    <div class="eyebrow">Бриф заполнен · Теннисный кемп</div>
+    <h2 class="res-title">БРИФ<br><span class="blue">ГОТОВ.</span></h2>
+    <div class="res-grid" id="resgrid"></div>
+    <div class="res-actions">
+      <button class="btn-dark" id="cpybtn" onclick="doCopy()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect x="4" y="4" width="9" height="9" rx="1.5" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M10 4V2.5A1.5 1.5 0 0 0 8.5 1h-7A1.5 1.5 0 0 0 0 2.5v7A1.5 1.5 0 0 0 1.5 11H4" stroke="currentColor" stroke-width="1.4"/>
+        </svg>
+        Скопировать текстом
+      </button>
+      <button class="btn-outline-dark" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <rect x="2" y="5" width="10" height="7" rx="1" stroke="currentColor" stroke-width="1.4"/>
+          <path d="M4 5V2h6v3M4 9h6M4 11h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+        Сохранить PDF
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ── Intersection Observer ──
+  const secs = document.querySelectorAll('.fsec');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        setStep(+e.target.dataset.step);
+      }
+    });
+  }, { threshold: 0.12 });
+  secs.forEach(s => io.observe(s));
+
+  function setStep(n) {
+    document.getElementById('pnum').textContent = n + ' / 9';
+    document.querySelectorAll('.pdot').forEach(d => {
+      const i = +d.dataset.i;
+      d.className = 'pdot' + (i < n ? ' done' : i === n ? ' active' : '');
+    });
+  }
+
+  // ── Tags ──
+  document.querySelectorAll('.tag-wrap').forEach(g => {
+    g.querySelectorAll('.tag').forEach(t => {
+      t.addEventListener('click', () => t.classList.toggle('on'));
+    });
+  });
+
+  // ── Helpers ──
+  const v = id => { const el = document.getElementById(id); return el && el.value.trim() || '—'; };
+  const checked = name => [...document.querySelectorAll(`[name="${name}"]:checked`)].map(i => i.value).join(', ') || '—';
+  const radio = name => { const el = document.querySelector(`[name="${name}"]:checked`); return el ? el.value : '—'; };
+  const tags = id => [...document.querySelectorAll(`#${id} .tag.on`)].map(t => t.dataset.v).join(', ') || '—';
+
+  // ── Build result ──
+  function buildResult() {
+    const rows = [
+      ['Клиент / компания',       v('f_client')],
+      ['Контакт',                  v('f_contact')],
+      ['Название кемпа',           v('f_campname')],
+      ['Локация',                  v('f_location')],
+      ['Даты / сезон',             v('f_dates')],
+      ['Текущие площадки',         v('f_existing')],
+      ['Аудитория',                checked('aud')],
+      ['Кто покупает',             radio('buyer')],
+      ['Бюджет покупателя',        radio('budget_buyer')],
+      ['О аудитории',              v('f_aud_note')],
+      ['Цель сайта',               radio('goal')],
+      ['Доп. действия',            checked('action')],
+      ['Текущие каналы',           v('f_channels')],
+      ['Разделы сайта',            checked('pages')],
+      ['Есть материалы',           checked('assets')],
+      ['Кол-во тренеров',          v('f_coaches')],
+      ['УТП',                      v('f_utp')],
+      ['Конкуренты',               v('f_comp')],
+      ['Нравится у конкурентов',   v('f_comp_like')],
+      ['Избегать',                 v('f_comp_hate')],
+      ['Референсы',                v('f_refs')],
+      ['Тон',                      tags('tones')],
+      ['Цвета',                    radio('colors') + (v('f_colors') !== '—' ? ' · ' + v('f_colors') : '')],
+      ['Стиль',                    radio('style')],
+      ['Табу в дизайне',           v('f_notab')],
+      ['CMS',                      radio('cms')],
+      ['Интеграции',               checked('integr')],
+      ['Языки',                    checked('lang')],
+      ['Домен / хостинг',          radio('hosting')],
+      ['Бюджет на разработку',     radio('budget')],
+      ['Дедлайн',                  radio('deadline') + (v('f_deadline') !== '—' ? ' · ' + v('f_deadline') : '')],
+      ['Поддержка',                checked('support')],
+      ['Принятие решений',         radio('decision')],
+      ['Опыт с агентством',        radio('prev')],
+      ['Ценности',                 tags('vals')],
+      ['Доп. пожелания',           v('f_extra')],
+    ];
+
+    document.getElementById('resgrid').innerHTML = rows.map(([l, val]) => `
+      <div class="res-card">
+        <div class="res-lbl">${l}</div>
+        <div class="res-val">${val === '—' ? '' : val}</div>
+      </div>`).join('');
+
+    const res = document.getElementById('result');
+    res.classList.add('show');
+    res.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function doCopy() {
+    const cards = document.querySelectorAll('.res-card');
+    const text = '═══ БРИФ — ТЕННИСНЫЙ КЕМП ═══\n\n' +
+      [...cards].map(c =>
+        c.querySelector('.res-lbl').textContent + ': ' +
+        (c.querySelector('.res-val').textContent || '—')
+      ).join('\n');
+
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('cpybtn');
+      btn.textContent = 'Скопировано!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Скопировать текстом'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+</script>
+
+</body>
+</html>
