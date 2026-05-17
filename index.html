@@ -120,6 +120,7 @@
       flex-direction: column;
       justify-content: center;
       padding: 100px 40px 80px;
+      scroll-margin-top: 60px;
     }
 
     .eyebrow {
@@ -214,14 +215,7 @@
       align-items: flex-start;
       padding: 80px 40px;
       border-top: 1px solid rgba(255,255,255,0.05);
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.45s ease, transform 0.45s ease;
-    }
-
-    .fsec.visible {
-      opacity: 1;
-      transform: translateY(0);
+      scroll-margin-top: 60px;
     }
 
     .fsec-inner {
@@ -1184,16 +1178,13 @@
 </section>
 
 <script>
-  // ── Intersection Observer ──
+  // ── Progress on scroll ──
   const secs = document.querySelectorAll('.fsec');
   const io = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        setStep(+e.target.dataset.step);
-      }
+      if (e.isIntersecting) setStep(+e.target.dataset.step);
     });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.05 });
   secs.forEach(s => io.observe(s));
 
   function setStep(n) {
